@@ -9,7 +9,7 @@ using namespace std;
 
 void hanNuoTowel(int floor, char A, char help, char C) {
 	// 注意在中断条件，如果不满足就执行非中断问题点。
-	// 防止在中断问题后自动调用非中断函数
+	// 防止在中断问题后自动调用非中断函数。
 	if (floor == 1) {
 		cout << "from->" << A << "->move to->" << C << endl;
 	}
