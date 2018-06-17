@@ -32,10 +32,11 @@ void checkSubLab(int arr[][6], int i, int j) {
 	}
 	if (arr[i][j] == 1) {
 		arr[i][j] = 2;
+		checkSubLab(arr, i + 1, j);
+		checkSubLab(arr, i, j - 1);
+		checkSubLab(arr, i, j + 1);
 	}
-	checkSubLab(arr, i + 1, j);
-	checkSubLab(arr, i, j - 1);
-	checkSubLab(arr, i, j + 1);
+	
 	
 }
 void islandNumber(int arr[][6], int& counts) {
@@ -57,17 +58,17 @@ int main(void) {
 						{1, 1, 1, 0, 1, 0},
 						{1, 0, 0, 1, 0, 0 },
 						{0, 0, 0, 0, 0, 0 } };
-	//srand((unsigned)time(0));
-	//for (int i = 0; i < 4; ++i) {
-	//	for (int j = 0; j < 6; ++j) {
-	//		arr[i][j] = (int)rand() % 2;
-	//	}
-	//}
-	//printArr(arr);
+	srand((unsigned)time(0));
+	for (int i = 0; i < 4; ++i) {
+		for (int j = 0; j < 6; ++j) {
+			arr[i][j] = (int)rand() % 2;
+		}
+	}
+	printArr(arr);
 	int count = 0; 
 	islandNumber(arr, count);
 	cout << count << endl;
 
 	return 0;
 }
-// 在这里截至对小范围数组进行了简单的感染方法求解，如果针对大问题求解就需要用到“并查集合”的方法
+// 在这里截至对小范围数组进行了简单的infect感染方法求解，如果针对大问题求解就需要用到"并行计算"的处理方法。
