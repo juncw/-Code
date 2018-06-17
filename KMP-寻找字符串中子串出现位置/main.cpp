@@ -22,16 +22,57 @@ using namespace std;
 
 
 void getStrNext(string str, int* next) {
+	if (str.empty()) {
+		return;
+	}
 
+	next[0] = -1;
+	next[1] = 0;
+	int len = str.length();
+	int i = 2, j = 0;
+	while (i <= len) {
+		if (str[i-1] == str[j]) {
+			next[i++] = ++j;
+		}
+		else if(next[j] == -1){
+			next[i++] = 0;
+		}
+		else {
+			j = next[j];
+		}
+	}
 }
-void getIndexofStr(string str1, string str2) {
+int getIndexofStr(string str1, string str2) {
 	int* next = new int[str2.length()];
 	getStrNext(str2, next);               // get "next[]" 加速寻找位置操作
+	cout << "str2中的next[]数组：";
+	for (int i = 0; i < str2.length(); ++i) {
+		cout << next[i] << " ";
+	}
+	cout << endl;
+
+	int i = 0, j = 0;
+	while (i < str1.length() && j < str2.length()) {
+		if (str1[i] == str2[j]) {
+			i++;
+			j++;
+		}
+		else if(next[j] == -1) {
+			i++;
+		}
+		else {
+			j = next[j];
+		}
+	}
+	int index = j != str2.length() ? -1 : i - str2.length();
+	return index;
 }
 
 
 int main(void) {
 	string str1 = "abdabcdeabdabcdf";
 	string str2 = "abdabcdf";
+	int indexStr = getIndexofStr(str1, str2);
+	cout << indexStr << endl;
 	return 0;
 }
